@@ -11,7 +11,7 @@ it so:
 
 ```bash
 pip install pre-commit
-pre-commit install
+pre-commit install -t pre-commit -t commit-msg
 ```
 
 ## Source Code Tree
