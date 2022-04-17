@@ -1,0 +1,12 @@
+services:
+  api:
+    image: bp-api
+    container_name: bp-api
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+      target: dev_stage
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./api/env
