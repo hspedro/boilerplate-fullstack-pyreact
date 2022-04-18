@@ -2,11 +2,23 @@ services:
   api:
     image: bp-api
     container_name: bp-api
+    restart: always
     build:
       context: .
       dockerfile: ./api/Dockerfile
       target: dev_stage
     ports:
       - "8080:8080"
+    env_file:
+      - ./api/env
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: bp-db
+    restart: always
+    # TODO: create volume for the data folder, in order to be persistent
+    # TODO: move to secrets
     env_file:
       - ./api/env

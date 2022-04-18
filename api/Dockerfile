@@ -13,19 +13,20 @@ RUN poetry config virtualenvs.create false && \
 RUN --mount=type=cache,target=/code/.cache/pypoetry \
     poetry install --no-interaction --no-ansi --no-dev
 
-COPY ${BASE_PATH}/api/ /code/api
+COPY ${BASE_PATH} /code/api
 WORKDIR /code/api
+ENV PYTHONPATH=/code/api
 
 FROM base_image as prod_stage
 
-CMD uvicorn main:app \
+CMD uvicorn api.main:app \
     --host $HOST \
     --port $PORT \
     --workers $WORKERS
 
 FROM base_image as dev_stage
 
-CMD uvicorn main:app \
+CMD uvicorn api.main:app \
     --host $HOST \
     --port $PORT \
     --workers $WORKERS \
