@@ -22,3 +22,14 @@ services:
     # TODO: move to secrets
     env_file:
       - ./api/env
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: bp-pgadmin
+    depends_on:
+      - db
+    # TODO: move to secrets
+    env_file:
+      - ./api/env
+    ports:
+      - "8088:80"
